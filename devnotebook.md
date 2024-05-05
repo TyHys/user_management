@@ -14,6 +14,8 @@
 * Queried the users table & saw that the email_verified bool was flipped to TRUE for the user.
 * Admin user was changed to authenticated in Postgres
 * Added check to see that user is ANONYMOUS in user_service.py as well.
+* Noticed that registering a user doesn't actually show you the full details in the response body.
+* Modified the response model in user_management/app/routers/user_routes.py to correct for this.
 
 ⫸ 
 ⪢
