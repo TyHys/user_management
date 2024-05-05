@@ -237,11 +237,24 @@ async def myaccount(
     print(f"What is my current user data: {current_user}")
     if current_user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required")
-    return UserResponse.model_construct(
-        id=current_user["user_id"],
-        role=current_user["role"],
-        email=current_user["sub"],
-
+    
+    user = await UserService.get_by_id(db, current_user["user_id"])
+    
+    return UserResponse(
+        id=user.id,
+        bio=user.bio,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        nickname=user.nickname,
+        email=user.email,
+        role=user.role,
+        last_login_at=user.last_login_at,
+        profile_picture_url=user.profile_picture_url,
+        github_profile_url=user.github_profile_url,
+        linkedin_profile_url=user.linkedin_profile_url,
+        created_at=user.created_at,
+        updated_at=user.updated_at,
+        links=create_user_links(user.id, request)
     )
 
 @router.put(
