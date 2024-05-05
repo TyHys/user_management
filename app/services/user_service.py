@@ -63,12 +63,8 @@ class UserService(DbService):
                 
             session.add(new_user)
             await session.commit()
-
-            new_user.verification_token = generate_verification_token()
-
-            if not new_user.email_verified:
+            if new_user.email_verified == False:
                 await email_service.send_verification_email(new_user)
-
             return new_user
         except ValidationError as e:
             raise e
@@ -150,7 +146,10 @@ class UserService(DbService):
             raise InvalidVerificationTokenException("Invalid or expired verification token.")
         user.email_verified = True
         user.verification_token = None
-        user.role = UserRole.AUTHENTICATED
+
+        if user.role == UserRole.ANONYMOUS:
+            user.role = UserRole.AUTHENTICATED
+
         session.add(user)
         await session.commit()
 
