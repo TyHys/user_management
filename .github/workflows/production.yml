@@ -60,6 +60,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Sanitize ref_name
+        id: sanitize_ref_name
+        run: |
+          echo "Ref name is ${{ github.ref_name }}"
+          sanitized_ref_name=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+          echo "::set-output name=sanitized_ref_name::${sanitized_ref_name}"
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
@@ -73,15 +80,15 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: tewq01/wis_club_api:${{ github.ref_name }} # Uses the branch name for tagging
-          platforms: linux/amd64,linux/arm64 # Multi-platform support
+          tags: tewq01/wis_club_api:${{ steps.sanitize_ref_name.outputs.sanitized_ref_name }}
+          platforms: linux/amd64,linux/arm64
           cache-from: type=registry,ref=tewq01/wis_club_api:cache
           cache-to: type=inline,mode=max
           
       - name: Scan the Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'tewq01/wis_club_api:${{ github.ref_name }}'
+          image-ref: 'tewq01/wis_club_api:${{ steps.sanitize_ref_name.outputs.sanitized_ref_name }}'
           format: 'table'
           exit-code: '1' # Fail the job if vulnerabilities are found
           ignore-unfixed: true
