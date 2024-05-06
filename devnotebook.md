@@ -16,6 +16,11 @@
 * Added check to see that user is ANONYMOUS in user_service.py as well.
 * Noticed that registering a user doesn't actually show you the full details in the response body.
 * Modified the response model in user_management/app/routers/user_routes.py to correct for this.
+* Noticed a similar issue in the response model for the /myaccount endpoint.
+    * Corrected this, similar to the preivous issue.
+* Added a route to change the professional status of an account.
+* Added an email template and successfully tested the automatic sending.
+* Wrote new tests for the additional endpoint
 
 ⫸ 
 ⪢
