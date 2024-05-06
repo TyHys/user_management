@@ -1,8 +1,10 @@
+# Introduction
+
 Throughout this project I learned a ton about debugging and troubleshooting applications. More importantly, I feel like I learned a lot more about test driven development. I'm still in the habbit of writing something and getting far too from writing tests before I finally realize I have to go back and write them. During this project I tried to keep tests relatively close instead of leaving them until the end.
 
 I learned a lot about careful reading of documentation as well as the resilience needed to see something complex through to its end. I was really unfamiliar with APIs before the Homework 9 a few weeks ago, so I've been doing everything I can to familiarize myself with how they work via this project. While I feel like I did struggle a lot in some areas since I lack a computer science background, I do feel like I learned a great deal not only from this project but the class as a whole.
 
-The five issues I debugged are:
+# Issues
 
 * [/myaccount Endpoint returns null values for populated database info #8](https://github.com/TyHys/user_management/issues/8)
 * [/register/ Endpoint presents incomplete data #6](https://github.com/TyHys/user_management/issues/6)
@@ -10,7 +12,9 @@ The five issues I debugged are:
 * [Verification Link Error #2](https://github.com/TyHys/user_management/issues/2)
 * [LibC Vulnerability - Preventing Docker Deployment #1](https://github.com/TyHys/user_management/issues/1)
 
-
+# Tests
+* [Two tests were developed for the event schemas to test some edge cases.](https://github.com/TyHys/user_management/commit/a0142b00ea526b903b5040dd7526e634178b6397#diff-290282138412a840643c110987874d7b4c32259148ea54e8ca419ccacbcb6527)
+* [Three more tests were developed for testing the change is-professional endpoint.](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9)
 
 I focused on adding the user management feature: a method to modify the professional status of an individual and a feature so that users can update their own profile.
 
