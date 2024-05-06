@@ -1,11 +1,9 @@
 # Introduction
-
 Throughout this project I learned a ton about debugging and troubleshooting applications. More importantly, I feel like I learned a lot more about test driven development. I'm still in the habbit of writing something and getting far too from writing tests before I finally realize I have to go back and write them. During this project I tried to keep tests relatively close instead of leaving them until the end.
 
 I learned a lot about careful reading of documentation as well as the resilience needed to see something complex through to its end. I was really unfamiliar with APIs before the Homework 9 a few weeks ago, so I've been doing everything I can to familiarize myself with how they work via this project. While I feel like I did struggle a lot in some areas since I lack a computer science background, I do feel like I learned a great deal not only from this project but the class as a whole.
 
 # Issues
-
 * [/myaccount Endpoint returns null values for populated database info #8](https://github.com/TyHys/user_management/issues/8)
 * [/register/ Endpoint presents incomplete data #6](https://github.com/TyHys/user_management/issues/6)
 * [Admin User Erroneously Converts to "Authenticated" #4](https://github.com/TyHys/user_management/issues/4)
@@ -17,12 +15,17 @@ I learned a lot about careful reading of documentation as well as the resilience
 * [Three more tests were developed for testing the change is-professional endpoint.](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9)
 * [Five more tests were later written in the event schema and user service tests.](https://github.com/TyHys/user_management/commit/98bf6e8d049ab4c09b2a2f5d21527a541ab6452b)
 
-I focused on adding the user management feature: a method to modify the professional status of an individual and a feature so that users can update their own profile.
+(There are other tests, such as for the Self-Profile Update, I just listed ten above since that was the project guidelines.)
 
-Here you can see where a user was successfully notified via email of their email, received after the status was updated ([Link to the commit](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-f2b3ba8fa16caedf3a421cca398204d903883799a3e986e4024356facad8aaab)):
+# Feature
+For the additional feature, I chose: User Profile Management.  
+Description: Enhance the user profile management functionality to allow users to update their profile fields and enable managers and admins to upgrade users to professional status.
+
+I successfully added a new endpoint so that admins and managers can update the professional status of any account that has been registered. Upon modification, the user will receive an email notification to alert them of the change. Here you can see where a user was successfully notified via email of their email, received after the status was updated ([Link to the commit](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-f2b3ba8fa16caedf3a421cca398204d903883799a3e986e4024356facad8aaab)):
  ![email](images/prof_email.png)
-
  
+ I also added an endpoint so that regular users can update their profile. This will allow self-service so that an individual can update their profile directly through a singular endpoint designed for the purpose.
+ ![change endpoint](images/change-profile endpoint.png)
 
 # Developer Notebook:
 * Composed the docker image and navigated to PGAdmin, got Postgres setup per instructions. No issues.
@@ -47,3 +50,6 @@ Here you can see where a user was successfully notified via email of their email
 * Added a route to change the professional status of an account.
 * Added an email template and successfully tested the automatic sending.
 * Wrote new tests for the additional endpoint
+* Made a new endpoint so that users can update their own profile based on the existing ones for updating information.
+* Wrote additional tests to satisfy new feature boundaries.
+* Published completed work with notebook.
