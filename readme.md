@@ -2,6 +2,16 @@ Throughout this project I learned a ton about debugging and troubleshooting appl
 
 I learned a lot about careful reading of documentation as well as the resilience needed to see something complex through to its end. I was really unfamiliar with APIs before the Homework 9 a few weeks ago, so I've been doing everything I can to familiarize myself with how they work via this project. While I feel like I did struggle a lot in some areas since I lack a computer science background, I do feel like I learned a great deal not only from this project but the class as a whole.
 
+The five issues I debugged are:
+
+* [/myaccount Endpoint returns null values for populated database info #8](https://github.com/TyHys/user_management/issues/8)
+* [/register/ Endpoint presents incomplete data #6](https://github.com/TyHys/user_management/issues/6)
+* [Admin User Erroneously Converts to "Authenticated" #4](https://github.com/TyHys/user_management/issues/4)
+* [Verification Link Error #2](https://github.com/TyHys/user_management/issues/2)
+* [LibC Vulnerability - Preventing Docker Deployment #1](https://github.com/TyHys/user_management/issues/1)
+
+
+
 I focused on adding the user management feature: a method to modify the professional status of an individual and a feature so that users can update their own profile.
 
 Here you can see where a user was successfully notified via email of their email, received after the status was updated ([Link to the commit](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-f2b3ba8fa16caedf3a421cca398204d903883799a3e986e4024356facad8aaab)):

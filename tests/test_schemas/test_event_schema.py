@@ -72,6 +72,11 @@ def test_event_create_valid(event_create_data):
     assert event_create.published == event_create_data["published"]
     assert event_create.event_type == event_create_data["event_type"]
 
+def test_event_create_invalid_event_type(event_create_data):
+    event_create_data["event_type"] = "UNKNOWN_TYPE"
+    with pytest.raises(ValidationError):
+        EventCreate(**event_create_data)
+
 # Tests for EventUpdate
 def test_event_update_valid(event_update_data):
     event_update = EventUpdate(**event_update_data)
@@ -118,3 +123,9 @@ def test_event_list_response_valid(event_response_data):
     assert event_list_response.page == event_list_response_data["page"]
     assert event_list_response.size == event_list_response_data["size"]
     assert event_list_response.links == event_list_response_data["links"]
+
+# Additional test for empty event title
+def test_event_base_empty_title(event_base_data):
+    event_base_data["title"] = ""
+    with pytest.raises(ValidationError):
+        EventBase(**event_base_data)
