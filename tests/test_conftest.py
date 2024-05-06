@@ -55,8 +55,8 @@ async def test_user_unlock(db_session, locked_user):
     assert not updated_user.is_locked
 
 @pytest.mark.asyncio
-async def test_update_professional_status(db_session, verified_user):
-    verified_user.update_professional_status(True)
+async def test_change_is_prof(db_session, verified_user):
+    verified_user.change_is_prof(True)
     await db_session.commit()
     result = await db_session.execute(select(User).filter_by(email=verified_user.email))
     updated_user = result.scalars().first()

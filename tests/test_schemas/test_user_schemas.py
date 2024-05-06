@@ -3,6 +3,7 @@ import pytest
 from pydantic import ValidationError
 from datetime import datetime
 from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest
+from app.services.user_service import UserService
 
 # Fixtures for common test data
 @pytest.fixture
@@ -108,3 +109,33 @@ def test_user_base_url_invalid(url, user_base_data):
     user_base_data["profile_picture_url"] = url
     with pytest.raises(ValidationError):
         UserBase(**user_base_data)
+
+# Test updating a user's is_professional status to True
+async def test_update_user_isprof_true(db_session, user, email_service):
+    testing_user = await UserService.change_is_prof(
+        db_session, 
+        user.id, 
+        True, 
+        email_service
+    )
+    assert testing_user is not None
+    assert testing_user.is_professional is True
+
+async def test_update_user_isprof_false(db_session, user, email_service):
+    testing_user = await UserService.change_is_prof(
+        db_session, 
+        user.id, 
+        False, 
+        email_service
+    )
+    assert testing_user is not None
+    assert testing_user.is_professional is False
+
+async def test_update_isprof_invalid_id(db_session, email_service):
+    testing_user = await UserService.change_is_prof(
+        db_session, 
+        "invalid_id", 
+        True, 
+        email_service
+    )
+    assert testing_user is None

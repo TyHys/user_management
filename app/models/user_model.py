@@ -105,7 +105,7 @@ class User(Base, AsyncAttrs):
     def has_role(self, role_name: UserRole) -> bool:
         return self.role == role_name
 
-    def update_professional_status(self, status: bool):
+    def change_is_prof(self, status: bool):
         """Updates the professional status and logs the update time."""
         self.is_professional = status
         self.professional_status_updated_at = func.now()

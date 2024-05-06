@@ -14,7 +14,9 @@ from uuid import UUID
 from app.services.email_service import EmailService
 from app.models.user_model import UserRole
 from app.exceptions.user_exceptions import UserNotFoundException, EmailAlreadyExistsException, InvalidCredentialsException, AccountLockedException, InvalidVerificationTokenException
+import logging
 
+logger = logging.getLogger(__name__)
 settings = get_settings()
 
 class UserService(DbService):
@@ -168,3 +170,28 @@ class UserService(DbService):
         user.failed_login_attempts = 0
         session.add(user)
         await session.commit()
+
+    @classmethod
+    async def change_is_prof(cls, db_session: AsyncSession, user_id: UUID, new_status: bool, notification_service: EmailService) -> Optional[User]:
+        try:
+            # Construct the update query
+            update_query = update(User).where(User.id == user_id).values(is_professional=new_status).execution_options(synchronize_session="fetch")
+            # Execute the update query
+            await cls._execute_query(db_session, update_query)
+            # Fetch the updated user
+            user = await cls.get_by_id(db_session, user_id)
+            if user:
+                db_session.refresh(user)
+                logger.info(f"Successfully updated professional status for user {user_id}.")
+                try:
+                    # Send notification email regarding the update
+                    await notification_service.send_professional_change_email(user)
+                except Exception as error:
+                    logger.error(f"Failed to send professional status email: {error}.")
+                return user
+            else:
+                logger.error(f"Could not find user {user_id} after update.")
+                return None
+        except Exception as error:
+            logger.error(f"An error occurred while updating professional status: {error}")
+            return None
