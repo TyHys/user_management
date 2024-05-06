@@ -1,7 +1,12 @@
 # Introduction
+This report is available as a word document within the respository: [Link](Final_Report.docx)
+
 Throughout this project I learned a ton about debugging and troubleshooting applications. More importantly, I feel like I learned a lot more about test driven development. I'm still in the habbit of writing something and getting far too from writing tests before I finally realize I have to go back and write them. During this project I tried to keep tests relatively close instead of leaving them until the end.
 
 I learned a lot about careful reading of documentation as well as the resilience needed to see something complex through to its end. I was really unfamiliar with APIs before the Homework 9 a few weeks ago, so I've been doing everything I can to familiarize myself with how they work via this project. While I feel like I did struggle a lot in some areas since I lack a computer science background, I do feel like I learned a great deal not only from this project but the class as a whole.
+
+# Dockerhub Image
+* [wis_club_api](https://hub.docker.com/repository/docker/tewq01/wis_club_api/general)
 
 # Issues
 * [/myaccount Endpoint returns null values for populated database info #8](https://github.com/TyHys/user_management/issues/8)
@@ -25,7 +30,7 @@ I successfully added a new endpoint so that admins and managers can update the p
  ![email](images/prof_email.png)
  
  I also added an endpoint so that regular users can update their profile. This will allow self-service so that an individual can update their profile directly through a singular endpoint designed for the purpose.
- ![change endpoint](images/change-profile endpoint.png)
+ ![endpoint](images/change-profile-endpoint.png)
 
 # Developer Notebook:
 * Composed the docker image and navigated to PGAdmin, got Postgres setup per instructions. No issues.
