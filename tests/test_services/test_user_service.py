@@ -185,3 +185,43 @@ async def test_unlock_non_locked_user_account(db_session, user):
     await UserService.unlock_user_account(db_session, user.id)
     refreshed_user = await UserService.get_by_id(db_session, user.id)
     assert not refreshed_user.is_locked
+
+# Test that generate_nickname always returns a non-empty string
+async def test_generate_nickname_always_returns_non_empty_string():
+    nickname = generate_nickname()
+    assert isinstance(nickname, str) and len(nickname) > 0
+
+# Test updating a user does not change their role unintentionally
+async def test_update_user_does_not_change_role_unintentionally(db_session, user):
+    original_role = user.role
+    new_email = "no_role_change@example.com"
+    updated_user = await UserService.update(db_session, user.id, {"email": new_email})
+    assert updated_user.role == original_role, "User role should not change unless explicitly updated"
+
+# Test user login after password reset
+async def test_login_after_password_reset(db_session, user):
+    # First, simulate resetting the user's password
+    new_password = "NewSecurePassword2024!"
+    user.email_verified = True
+    await db_session.commit()
+    await UserService.reset_password(db_session, user.id, new_password)
+    
+    # Now attempt to login with the new password
+    logged_in_user = await UserService.login_user(db_session, user.email, new_password)
+    assert logged_in_user is not None
+    assert logged_in_user.email == user.email
+
+# Test promoting a user to an administrator role
+async def test_promote_user_to_admin(db_session, user):
+    # Assume the user is not an admin initially
+    assert user.role != UserRole.ADMIN
+
+    # Update the user's role to admin
+    updated_user = await UserService.update(db_session, user.id, {"role": UserRole.ADMIN.name})
+    
+    # Confirm the user has been upgraded to admin
+    assert updated_user.role == UserRole.ADMIN.name, "User role should be upgraded to ADMIN"
+
+    # Fetch the user directly to verify persistence
+    persistent_user = await UserService.get_by_id(db_session, user.id)
+    assert persistent_user.role == UserRole.ADMIN.name, "User role should persist as ADMIN in the database"

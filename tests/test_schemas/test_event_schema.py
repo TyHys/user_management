@@ -129,3 +129,14 @@ def test_event_base_empty_title(event_base_data):
     event_base_data["title"] = ""
     with pytest.raises(ValidationError):
         EventBase(**event_base_data)
+
+# Tests for updating with an empty description
+def test_event_update_empty_description(event_update_data):
+    event_update_data["description"] = ""
+    event_update = EventUpdate(**event_update_data)
+    assert event_update.title == event_update_data["title"]
+    assert event_update.description == ""  # Check if the description is empty
+    assert event_update.start_datetime == event_update_data["start_datetime"]
+    assert event_update.end_datetime == event_update_data["end_datetime"]
+    assert event_update.published == event_update_data["published"]
+    assert event_update.event_type == event_update_data["event_type"]
