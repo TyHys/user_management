@@ -15,6 +15,7 @@ I learned a lot about careful reading of documentation as well as the resilience
 # Tests
 * [Two tests were developed for the event schemas to test some edge cases.](https://github.com/TyHys/user_management/commit/a0142b00ea526b903b5040dd7526e634178b6397#diff-290282138412a840643c110987874d7b4c32259148ea54e8ca419ccacbcb6527)
 * [Three more tests were developed for testing the change is-professional endpoint.](https://github.com/TyHys/user_management/commit/9111cc08c4f6f98a8a476016c59d39b9ffc245a6#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9)
+* [Five more tests were later written in the event schema and user service tests.](https://github.com/TyHys/user_management/commit/98bf6e8d049ab4c09b2a2f5d21527a541ab6452b)
 
 I focused on adding the user management feature: a method to modify the professional status of an individual and a feature so that users can update their own profile.
 
@@ -46,8 +47,3 @@ Here you can see where a user was successfully notified via email of their email
 * Added a route to change the professional status of an account.
 * Added an email template and successfully tested the automatic sending.
 * Wrote new tests for the additional endpoint
-
-⫸ 
-⪢
-⪼
-⪫
