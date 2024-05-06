@@ -2,7 +2,7 @@ import uuid
 import pytest
 from pydantic import ValidationError
 from datetime import datetime
-from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest
+from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest, SelfProfileChange
 from app.services.user_service import UserService
 
 # Fixtures for common test data
@@ -139,3 +139,9 @@ async def test_update_isprof_invalid_id(db_session, email_service):
         email_service
     )
     assert testing_user is None
+
+#Writing test for SelfProfileChange
+def test_change_profile_fail():
+    with pytest.raises(ValueError) as exc_info:
+        SelfProfileChange()
+    assert "At least one field must be provided for update" in str(exc_info.value)
